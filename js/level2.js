@@ -60,7 +60,7 @@ class Level2 extends Phaser.Scene{
         });
 
 
-        this.load.image('classicTileset', 'assets/ClassicRPG_SHEET.png');
+        this.load.image('classicTileset', 'assets/ClassicRPG_Sheet.png');
         this.load.image('medievalTileset', 'assets/medieval_tilesheet.png');
         this.load.image('tilemap', 'assets/tilemap.png');
         this.load.tilemapTiledJSON('tilemap', 'assets/world2.json');

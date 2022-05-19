@@ -76,7 +76,7 @@ class PauseMenu extends Phaser.Scene{
             const herbs= this.add.image(w*0.25,h*0.75,'herbs').setOrigin(0.5).setScrollFactor(0.5).setScale(1*0.5625)
             const herbsValue= this.add.text(w*0.375, h*0.75, `x${playerStats.items.herbs}`, {fontSize: 25*0.5625, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
         }else if(this.showMenu.save){
-            const rectangle= this.add.rectangle(0,0,w/0.5,h, 0xffffff).setScrollFactor(0).setOrigin(0);
+            const rectangle= this.add.rectangle(0,0,w*0.5,h, 0xffffff).setScrollFactor(0).setOrigin(0);
             const saveText= this.add.text(w*0.25, h*0.125, 'Save', {fontSize: 30*0.5625, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
             const savingText= this.add.text(w*0.25, h*0.5, 'Save completed', {fontSize: 25*0.5625, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
         }

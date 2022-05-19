@@ -14,11 +14,11 @@ config={
         gravity: { y: 0 },
       }
     },
-    scene: [StartScene, Level1, Level2, Battle, RecoverScene, Hospital, GymLeaderIntro, Shop, PauseMenu]
+    scene: [StartScene, Level1, Level2, Battle, RecoverScene, Hospital, GymLeaderIntro, Shop, PauseMenu, NewGameScene]
 }
 
 const game = new Phaser.Game(config);
-console.log(game)
+
 const w=game.config.width
 const h= game.config.height
 console.log(w, h)

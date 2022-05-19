@@ -274,3 +274,10 @@ const handleItemsReward = () =>{
 
     return reward
 }
+
+const checkOrientation = () => {
+    return screen.orientation.type
+}
+
+
+

@@ -1,5 +1,6 @@
 let newGame=false;
 let device;
+
 class StartScene extends Phaser.Scene{
     constructor(){
         super({key: 'StartScene'})
@@ -27,7 +28,7 @@ class StartScene extends Phaser.Scene{
     }
 
     update(){
-
+        
     }
 
     deviceType = () => {
