@@ -24,6 +24,7 @@ class PauseMenu extends Phaser.Scene{
         const stats= this.add.text(w*0.75, h*0.2875, 'Stats', {color: 'black'}).setOrigin(0.5).setScrollFactor(0).setInteractive();
         const items= this.add.text(w*0.75, h*0.35, 'Items', {color: 'black'}).setOrigin(0.5).setScrollFactor(0).setInteractive();
         const save= this.add.text(w*0.75, h*0.4125, 'Save', {color: 'black'}).setOrigin(0.5).setScrollFactor(0).setInteractive();
+    
         this.showMenu={
             stats:false,
             items:false,

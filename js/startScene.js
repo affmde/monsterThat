@@ -13,14 +13,17 @@ class StartScene extends Phaser.Scene{
     create(){
         const savedGame= localStorage.getItem('monsterThatSaveGame')
         const title= this.add.text(w/2, h*0.32, 'MonsterThat', {fontSize: 40}).setOrigin(0.5);
+        const canvas= document.querySelector('canvas');
         savedGame && this.add.text(w/2, h*0.56, 'Continue saved Game', {fontSize: 25}).setOrigin(0.5).setInteractive().on('pointerdown', ()=>{
-            newGame=false
+            newGame=false;
+            canvas.requestFullscreen();
             this.scene.stop();
             this.scene.start('Level2')
         });
         const newGameText= this.add.text(w/2, h*0.68, 'New game', {fontSize: 25}).setOrigin(0.5).setInteractive();
         newGameText.on('pointerdown', ()=>{
             newGame=true;
+            canvas.requestFullscreen()
             this.scene.stop();
             this.scene.start('NewGameScene')
         })

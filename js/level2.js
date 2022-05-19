@@ -84,6 +84,7 @@ class Level2 extends Phaser.Scene{
             this.load.image('left', 'assets/gamepad/left.png');
             this.load.image('right', 'assets/gamepad/right.png');
         }
+        this.load.image('fullscreen', 'assets/fullscreen.png');
         
     }
 
@@ -305,7 +306,7 @@ class Level2 extends Phaser.Scene{
         isDown = keyObj.isDown;
 
         //Pause Menu
-        this.menu= this.add.image(700, 50, 'menu').setScrollFactor(0).setInteractive().setOrigin(0.5).setScale(1*0.5625)
+        this.menu= this.add.image(w*0.9, h*0.25, 'menu').setScrollFactor(0).setInteractive().setOrigin(0.5).setScale(1*0.5625)
         this.menu.on('pointerup', ()=>{
             console.log(playerPosition)
             this.scene.launch('PauseMenu')
@@ -320,6 +321,17 @@ class Level2 extends Phaser.Scene{
             this.controls.down=this.add.image(w*0.1,h*0.8, 'down').setScrollFactor(0).setOrigin(0,0).setAlpha(0.6).setInteractive();
             this.controls.right=this.add.image(w*0.1,h*0.8, 'right').setScrollFactor(0).setOrigin(-0.5,0.5).setAlpha(0.6).setInteractive();
         }
+
+        //Fullscreen handling
+        const fullscreenIcon= this.add.image(w*0.9, h*0.1, 'fullscreen').setScrollFactor(0).setInteractive();
+        fullscreenIcon.on('pointerup', ()=>{
+            if(this.scale.isFullscreen){
+                const close= document.exitFullscreen()||document.cancelFullScreen()
+            }else{
+                const canvas= document.querySelector('canvas')
+                canvas.requestFullscreen()
+            }
+        })
         
     }//end of create Method
 
