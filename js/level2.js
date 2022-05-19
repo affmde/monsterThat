@@ -326,7 +326,7 @@ class Level2 extends Phaser.Scene{
     update(){
         if(currentScene==='Level2'){
             
-
+            this.checkAnimation();
             this.checkControls();
     
             playerStats.level=this.playerLevel()
@@ -425,6 +425,14 @@ class Level2 extends Phaser.Scene{
                     this.scene.launch('Battle'); 
                 }
             }
+        }
+    }
+
+    checkAnimation(){
+        if(animation==='idle'){
+            this.player.anims.play('bandit_idle', true)
+        }else if(animation==='walk'){
+            this.player.anims.play('bandit_walk', true)
         }
     }
 
