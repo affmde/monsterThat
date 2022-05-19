@@ -105,7 +105,7 @@ class Level2 extends Phaser.Scene{
         if(newGame===false){
             this.player=this.physics.add.sprite(loadData.x || 6487,loadData.y || 7980, 'bandit');
         }else{
-            this.player=this.physics.add.sprite(6487, 7980, 'bandit');
+            this.player=this.physics.add.sprite(6487, 7800, 'bandit');
         }
         this.player.setSize(16,16)
         this.player.setOffset(8,16)
@@ -465,7 +465,7 @@ class Level2 extends Phaser.Scene{
                 this.player.setVelocityX(0);
                 animation='idle';
             })
-            this.controls.left.on('pointerleave', ()=>{
+            this.controls.left.on('pointerout', ()=>{
                 this.player.setVelocityX(0);
                 animation='idle';
             })
@@ -479,7 +479,7 @@ class Level2 extends Phaser.Scene{
                 this.player.setVelocityX(0);
                 animation='idle';
             })
-            this.controls.right.on('pointerleave', ()=>{
+            this.controls.right.on('pointerout', ()=>{
                 this.player.setVelocityX(0);
                 animation='idle';
             })
@@ -493,7 +493,7 @@ class Level2 extends Phaser.Scene{
                 this.player.setVelocityY(0);
                 animation='idle';
             })
-            this.controls.up.on('pointerleave', ()=>{
+            this.controls.up.on('pointerout', ()=>{
                 this.player.setVelocityY(0);
                 animation='idle';
             })
@@ -507,7 +507,7 @@ class Level2 extends Phaser.Scene{
                 this.player.setVelocityY(0);
                 animation='idle';
             })
-            this.controls.down.on('pointerleave', ()=>{
+            this.controls.down.on('pointerout', ()=>{
                 this.player.setVelocityY(0);
                 animation='idle';
             })

@@ -22,7 +22,7 @@ class StartScene extends Phaser.Scene{
         newGameText.on('pointerdown', ()=>{
             newGame=true;
             this.scene.stop();
-            this.scene.start('Level2')
+            this.scene.start('NewGameScene')
         })
         device=this.deviceType()
     }
