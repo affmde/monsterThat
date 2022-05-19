@@ -43,10 +43,10 @@ class Battle extends Phaser.Scene{
         
         //Opponent
         opponent= this.add.image(w*0.75,h*0.38 , `${currentOponnent.fig}`).setScale(4).setOrigin(0.5);
-        texts.opponentName = this.add.text(w*0.75, h*0.25, currentOponnent.name, {fontSize: 28}).setOrigin(0.5)
-        texts.opponentLevel = this.add.text(w*0.69, h*0.29, `Lvl: ${currentOponnent.level}`, {fontSize: 20}).setOrigin(0.5);
+        texts.opponentName = this.add.text(w*0.75, h*0.15, currentOponnent.name, {fontSize: 28, color: currentOponnent.type==='Bug' ? 'black' : 'white'}).setOrigin(0.5)
+        texts.opponentLevel = this.add.text(w*0.69, h*0.22, `Lvl: ${currentOponnent.level}`, {fontSize: 20, color: currentOponnent.type==='Bug' ? 'black' : 'white'}).setOrigin(0.5);
         this.actualHp=currentOponnent.hp;
-        texts.opponentHp= this.add.text(w*0.85, h*0.29, `Hp: ${this.actualHp}/${currentOponnent.hp}`, {fontSize: 20}).setOrigin(0.5)
+        texts.opponentHp= this.add.text(w*0.85, h*0.22, `Hp: ${this.actualHp}/${currentOponnent.hp}`, {fontSize: 20, color: currentOponnent.type==='Bug' ? 'black' : 'white'}).setOrigin(0.5)
 
         //Player
         player= this.add.image(w*0.13, h*0.83, 'player').setScale(4).setOrigin(0.5);
@@ -71,17 +71,17 @@ class Battle extends Phaser.Scene{
     menuHandling(){
         //Menu
         if(menu){
-            const playerRect = this.add.rectangle(w*0.25, h*0.625, w*0.375, h*0.15, 0xFFFFFF).setOrigin(0).setInteractive();
+            const playerRect = this.add.rectangle(w*0.25, h*0.625, w*0.375, h*0.3, 0xFFFFFF).setOrigin(0).setInteractive();
             if(menu.intro){
                 
             }else if(menu.menu){
-                const attackText = this.add.text(playerRect.x+w*0.025, h*0.65, 'Attacks', {fontSize: 20*0.5625, color: 'black'}).setInteractive();
+                const attackText = this.add.text(playerRect.x+w*0.025, h*0.65, 'Attacks', {fontSize: 25, color: 'black'}).setInteractive();
                 attackText.on('pointerdown',()=>{
                     menu.menu=false;
                     menu.attacks=true;
                 })
-                const itemText = this.add.text(playerRect.x+w*0.025, h*0.725, 'Item', {fontSize: 20*0.5625, color: 'black'}).setInteractive();
-                const quitText = this.add.text(playerRect.x+w*0.25, h*0.6875, 'Quit', {fontSize: 20*0.5625, color: 'black'}).setInteractive();
+                const itemText = this.add.text(playerRect.x+w*0.025, h*0.825, 'Item', {fontSize: 25, color: 'black'}).setInteractive();
+                const quitText = this.add.text(playerRect.x+w*0.25, h*0.7175, 'Quit', {fontSize: 25, color: 'black'}).setInteractive();
                 quitText.on('pointerdown', ()=>{
                     currentScene='Level2'
                     this.scene.stop();
@@ -91,7 +91,7 @@ class Battle extends Phaser.Scene{
                 if(turn==='player'){
                     //Player attacking turn
                     const attack1Damage= playerStats.attackBase+playerStats.level+Math.floor(Math.random()*playerStats.level)
-                    const attack1= this.add.text(playerRect.x+w*0.03125, h*0.65, 'Tackle', {fontSize: 20*0.5625, color: 'black'}).setInteractive();
+                    const attack1= this.add.text(playerRect.x+w*0.03125, h*0.65, 'Tackle', {fontSize: 25, color: 'black'}).setInteractive();
                     attack1.on('pointerdown', ()=>{
                         if(this.actualHp-attack1Damage<=0){
                             victory=true;
@@ -112,7 +112,7 @@ class Battle extends Phaser.Scene{
                             yoyo: true,
                         })
                     })
-                    const attack2 = this.add.text(playerRect.x+w*0.03125, h*0.725, 'Recover', {fontSize: 20*0.5625, color: 'black'}).setInteractive();
+                    const attack2 = this.add.text(playerRect.x+w*0.03125, h*0.825, 'Recover', {fontSize: 25, color: 'black'}).setInteractive();
                     const attack2Recover=playerStats.recoverBase+playerStats.level+Math.floor(Math.random()*playerStats.level)
                     attack2.on('pointerdown', ()=>{
                         if(playerStats.hp+attack2Recover>=playerStats.maxHp){
@@ -123,7 +123,7 @@ class Battle extends Phaser.Scene{
                         }
                         turn='next'
                     })
-                    const quitText = this.add.text(playerRect.x+w*0.25, h*0.6875, 'Back', {fontSize: 20*0.5625, color: 'black'}).setInteractive();
+                    const quitText = this.add.text(playerRect.x+w*0.25, h*0.7175, 'Back', {fontSize: 25, color: 'black'}).setInteractive();
                     quitText.on('pointerdown', ()=>{
                         menu.attacks=false;
                         menu.menu=true
