@@ -104,13 +104,14 @@ class PauseMenu extends Phaser.Scene{
             const rectangle= this.add.rectangle(0,0,w*0.5,h, 0xffffff).setScrollFactor(0).setOrigin(0);
             const badgesText= this.add.text(rectangle.width/2, h*0.125, 'Badges', {fontSize: 30, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
             const badge1= this.add.image(w*0.15, h*0.40, 'badge1').setScrollFactor(0);
-            const badge2= this.add.image(w*0.35, h*0.40, 'badge2').setScrollFactor(0).setTint(0x000000).setAlpha(0.8);
+            const badge2= this.add.image(w*0.35, h*0.40, 'badge2').setScrollFactor(0);
             const badge3= this.add.image(w*0.55, h*0.40, 'badge3').setScrollFactor(0).setTint(0x000000).setAlpha(0.8);
             const badge4= this.add.image(w*0.15, h*0.70, 'badge4').setScrollFactor(0).setTint(0x000000).setAlpha(0.8);
             const badge5= this.add.image(w*0.35, h*0.70, 'badge5').setScrollFactor(0).setTint(0x000000).setAlpha(0.8);
             const badge6= this.add.image(w*0.55, h*0.70, 'badge6').setScrollFactor(0).setTint(0x000000).setAlpha(0.8);
 
             this.checkForBadges(33)? badge1.setTint(0xFFFFFF).setAlpha(1) :badge1.setTint(0x000000).setAlpha(0.8);
+            this.checkForBadges(87)? badge2.setTint(0xFFFFFF).setAlpha(1) :badge2.setTint(0x000000).setAlpha(0.8);
         }
     }
 
