@@ -10,7 +10,7 @@ class DialogBox extends Phaser.GameObjects.Container{
             .setInteractive()
             .setScrollFactor(0)
             .setDepth(5);
-        this.txt= this.scene.add.text(w*0.04, h*0.78, this.typewrite(text), {fontSize: 25*0.5625, color: 'black', wordWrap: { width: 680, useAdvancedWrap: true }})
+        this.txt= this.scene.add.text(w*0.04, h*0.78, this.typewrite(text), {fontSize: 25*0.5625, color: 'black',lineSpacing: 10, wordWrap: { width: 680, useAdvancedWrap: true }})
             .setScrollFactor(0)
             .setOrigin(0)
             .setDepth(5);
@@ -20,7 +20,7 @@ class DialogBox extends Phaser.GameObjects.Container{
                 this.txt.destroy();
                 timeEventText.remove(false)
                 timeEventText=undefined
-                this.txt= this.scene.add.text(w*0.04, h*0.78, text, {fontSize: 25*0.5625, color: 'black', wordWrap: { width: 680, useAdvancedWrap: true }})
+                this.txt= this.scene.add.text(w*0.04, h*0.78, text, {fontSize: 25*0.5625, color: 'black', lineSpacing: 10, wordWrap: { width: 680, useAdvancedWrap: true }})
                     .setScrollFactor(0)
                     .setOrigin(0)
                     .setDepth(5);

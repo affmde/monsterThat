@@ -4,7 +4,7 @@ class Shop extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('bg', 'assets/shop.png');
+        this.load.image('bgShop', 'assets/shop.png');
         this.load.image('stone', 'assets/items/stone.png');
         this.load.image('coin', 'assets/items/coin.png');
         this.load.image('water', 'assets/items/water.png');
@@ -15,7 +15,7 @@ class Shop extends Phaser.Scene{
 
     create(){
         let showMessage=false
-        const bg= this.add.image(0,0,'bg').setOrigin(0)
+        const bg= this.add.image(0,0,'bgShop').setOrigin(0)
         const rect= this.add.rectangle(w*0.125,h*0.125,w*0.75,h*0.75, 0x000000).setAlpha(0.5).setOrigin(0);
         const backtxt= this.add.text(w*0.8125, h*0.9375, 'Leave shop', {fontSize: 30*0.5625}).setOrigin(0.5).setInteractive().on('pointerup',()=>{
             currentScene='Level2'
@@ -43,9 +43,9 @@ class Shop extends Phaser.Scene{
                 playerStats.items.meat-=50;
                 playerStats.items.stone-=40;
                 playerStats.maxHp+=5
-                const rect2=this.add.rectangle(w*0.5,h*0.5, w*0.5,h*0.25, 0xffffff).setOrigin(0.5).setInteractive();
-                const txtMessage= this.add.text(w*0.50625,h*0.50625, 'Bought completed!', {fontSize: 20*0.5625, color:'black', wordWrap: { width: w*0.5, useAdvancedWrap: true }}).setOrigin(0.5)
-                const okTxt= this.add.text(w*0.625, rect2.y+h*0.0625, 'Ok', {fontSize: 30*0.5625, color: 'black'}).setInteractive().setOrigin(0.5)
+                const rect2=this.add.rectangle(w*0.5,h*0.5, w*0.5,h*0.5, 0xffffff).setOrigin(0.5).setInteractive();
+                const txtMessage= this.add.text(w*0.50625,h*0.50625, 'Bought completed!', {fontSize: 25, color:'black', lineSpacing: 10 , wordWrap: { width: w*0.5, useAdvancedWrap: true }}).setOrigin(0.5)
+                const okTxt= this.add.text(w*0.625, rect2.y+h*0.0625, 'Ok', {fontSize: 30, color: 'black'}).setInteractive().setOrigin(0.5)
                 okTxt.on('pointerup', ()=>{
                     rect2.destroy();
                     txtMessage.destroy();
@@ -54,9 +54,9 @@ class Shop extends Phaser.Scene{
             }else{
                 console.log('no money my friend')
                 console.log(playerStats)
-                const rect2=this.add.rectangle(w*0.5,h*0.5, w*0.5,h*0.25, 0xffffff).setOrigin(0.5).setInteractive();
-                const txtMessage= this.add.text(w*0.50625,h*0.50625, 'You have no enough resources to buy Max Hp right now. Come Later!', {fontSize: 20*0.5625, color:'black', wordWrap: { width: w*0.5, useAdvancedWrap: true }}).setOrigin(0.5)
-                const okTxt= this.add.text(w*0.625, rect2.y+h*0.0625, 'Ok', {fontSize: 30*0.5625, color: 'black'}).setInteractive().setOrigin(0.5)
+                const rect2=this.add.rectangle(w*0.5,h*0.5, w*0.5,h*0.5, 0xffffff).setOrigin(0.5).setInteractive();
+                const txtMessage= this.add.text(w*0.50625,h*0.50625, 'You have no enough resources to buy Max Hp right now. Come Later!', {fontSize: 25, color:'black', lineSpacing: 10, wordWrap: { width: w*0.5, useAdvancedWrap: true }}).setOrigin(0.5)
+                const okTxt= this.add.text(w*0.625, rect2.y+h*0.15, 'Ok', {fontSize: 30, color: 'black'}).setInteractive().setOrigin(0.5)
                 okTxt.on('pointerup', ()=>{
                     rect2.destroy();
                     txtMessage.destroy();
@@ -86,9 +86,9 @@ class Shop extends Phaser.Scene{
                 playerStats.items.stone-=250;
                 playerStats.money-=50;
                 playerStats.attackBase+=5
-                const rect2=this.add.rectangle(w*0.5,h*0.5, w*0.5,h*0.25, 0xffffff).setOrigin(0.5).setInteractive();
-                const txtMessage= this.add.text(w*0.50625,h*0.50625, 'Bought completed!', {fontSize: 20*0.5625, color:'black', wordWrap: { width: w*0.5, useAdvancedWrap: true }}).setOrigin(0.5)
-                const okTxt= this.add.text(w*0.625, rect2.y+h*0.0625, 'Ok', {fontSize: 30*0.5625, color: 'black'}).setInteractive().setOrigin(0.5)
+                const rect2=this.add.rectangle(w*0.5,h*0.5, w*0.5,h*0.5, 0xffffff).setOrigin(0.5).setInteractive();
+                const txtMessage= this.add.text(w*0.50625,h*0.50625, 'Bought completed!', {fontSize: 25, color:'black',lineSpacing: 10 , wordWrap: { width: w*0.5, useAdvancedWrap: true }}).setOrigin(0.5)
+                const okTxt= this.add.text(w*0.625, rect2.y+h*0.0625, 'Ok', {fontSize: 35, color: 'black'}).setInteractive().setOrigin(0.5)
                 okTxt.on('pointerup', ()=>{
                     rect2.destroy();
                     txtMessage.destroy();
@@ -97,9 +97,9 @@ class Shop extends Phaser.Scene{
             }else{
                 console.log('no money my friend')
                 console.log(playerStats)
-                const rect2=this.add.rectangle(w*0.5,h*0.5, w*0.5,h*0.25, 0xffffff).setOrigin(0.5).setInteractive();
-                const txtMessage= this.add.text(w*0.50625,h*0.50625, 'You have no enough resources to buy Attack Base right now. Come Later!', {fontSize: 20*0.5625, color:'black', wordWrap: { width: w*0.5, useAdvancedWrap: true }}).setOrigin(0.5)
-                const okTxt= this.add.text(w*0.625, rect2.y+h*0.0625, 'Ok', {fontSize: 30*0.5625, color: 'black'}).setInteractive().setOrigin(0.5)
+                const rect2=this.add.rectangle(w*0.5,h*0.5, w*0.5,h*0.5, 0xffffff).setOrigin(0.5).setInteractive();
+                const txtMessage= this.add.text(w*0.50625,h*0.50625, 'You have no enough resources to buy Attack Base right now. Come Later!', {fontSize: 25, color:'black', lineSpacing: 10, wordWrap: { width: w*0.5, useAdvancedWrap: true }}).setOrigin(0.5)
+                const okTxt= this.add.text(w*0.625, rect2.y+h*0.15, 'Ok', {fontSize: 35, color: 'black'}).setInteractive().setOrigin(0.5)
                 okTxt.on('pointerup', ()=>{
                     rect2.destroy();
                     txtMessage.destroy();

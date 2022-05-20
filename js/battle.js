@@ -31,7 +31,7 @@ class Battle extends Phaser.Scene{
         //Variables
         console.log(currentOponnent)
         moneyReturn= currentOponnent.moneyReturn;
-        randExp= Math.floor(Math.random()*10)+50;
+        randExp= currentOponnent.type==='GymLeader' ? Math.floor(Math.random()*100)+100 : Math.floor(Math.random()*10)+50;
         //Background Image
         if(currentOponnent.type==='Trainer'){
             const bgImage= this.add.image(0,0,'bg').setOrigin(0);
@@ -166,9 +166,9 @@ class Battle extends Phaser.Scene{
                 }
                 
             }else if(menu.resume){
-                this.add.text(playerRect.x+w*0.03125, h*0.65, 'You won!', {fontSize: 20*0.5625, color: 'black'});
-                this.add.text(playerRect.x+w*0.03125, h*0.675, `You got ${moneyReturn}€`, {fontSize: 20*0.5625, color: 'black'});
-                this.add.text(playerRect.x+w*0.03125, h*0.7, `and ${randExp} xp`, {fontSize: 20*0.5625, color: 'black'});
+                this.add.text(playerRect.x+w*0.03125, h*0.65, 'You won!', {fontSize: 25, color: 'black'});
+                this.add.text(playerRect.x+w*0.03125, h*0.75, `You got ${moneyReturn}€`, {fontSize: 25, color: 'black'});
+                this.add.text(playerRect.x+w*0.03125, h*0.85, `and ${randExp} xp`, {fontSize: 25, color: 'black'});
                 playerRect.on('pointerdown', ()=>{
                     menu.resume=false;
                     menu.final=true

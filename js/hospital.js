@@ -20,6 +20,7 @@ class Hospital extends Phaser.Scene{
             playerStats.money-=cost;
             playerStats.hp=playerStats.maxHp;
             currentScene='Level2';
+            hospitalsVisited.push(currentHospital)
             setTimeout(()=>{
                 this.scene.stop()
                 this.scene.resume('Level2')

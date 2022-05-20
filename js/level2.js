@@ -9,6 +9,12 @@ let shops;
 let showStats=false;
 let currentScene='Level2'
 let playerPosition={}
+let options={
+    mobileGamepad:{
+        arrows: false,
+        joystic: true,
+    }
+}
 
 class Level2 extends Phaser.Scene{
     constructor(){
@@ -78,13 +84,16 @@ class Level2 extends Phaser.Scene{
         this.load.image('herbs', 'assets/items/herbs.png');
         this.load.image('wood', 'assets/items/wood.png');
         this.load.image('menu', 'assets/menuIcon.png');
+        this.load.image('fullscreen', 'assets/fullscreen.png');
         if(device!=='desktop'){
             this.load.image('up', 'assets/gamepad/up.png');
             this.load.image('down', 'assets/gamepad/down.png');
             this.load.image('left', 'assets/gamepad/left.png');
             this.load.image('right', 'assets/gamepad/right.png');
+        var url;
+        url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js';
+        this.load.plugin('rexvirtualjoystickplugin', url, true);
         }
-        this.load.image('fullscreen', 'assets/fullscreen.png');
         
     }
 
@@ -114,7 +123,7 @@ class Level2 extends Phaser.Scene{
         //Tilemap collisions
         forest.setCollisionByExclusion([0, -1]);
         sea.setCollisionByExclusion([0, -1]);
-        buildings.setCollisionByExclusion([0, -1, 283, 573, 574]);
+        buildings.setCollisionByExclusion([0, -1, 283, 573, 574, 543, 544, 545]);
         this.grass.setCollisionByExclusion([0,-1])
         this.physics.add.collider(this.player, forest)
         this.physics.add.collider(this.player, sea)
@@ -220,7 +229,7 @@ class Level2 extends Phaser.Scene{
             newGym.id=gym.id
             this.physics.add.collider(newGym, this.player, (gym, player)=>{
                 if(this.checkDefeatedGyms(newGym.id)){
-                    return
+                    const dialog= new DialogBox(this, "I dont want to see you again. You proved to be too good!", null,null,null)
                 }else{
                     this.saveGame()
                     currentOponnent=gym.properties;
@@ -273,6 +282,7 @@ class Level2 extends Phaser.Scene{
                     y: hospital.y
                 }
                 currentHospital.id=hospital.id
+                console.log(currentHospital)
                 this.scene.pause();
                 this.scene.launch('Hospital');
             })
@@ -315,11 +325,27 @@ class Level2 extends Phaser.Scene{
 
         //Controlls
         if(device!=='desktop'){
-            this.controls={}
-            this.controls.left=this.add.image(w*0.1, h*0.8, 'left').setScrollFactor(0).setAlpha(0.6).setInteractive();
-            this.controls.up=this.add.image(w*0.1, h*0.8, 'up').setScrollFactor(0).setOrigin(0,1).setAlpha(0.6).setInteractive();
-            this.controls.down=this.add.image(w*0.1,h*0.8, 'down').setScrollFactor(0).setOrigin(0,0).setAlpha(0.6).setInteractive();
-            this.controls.right=this.add.image(w*0.1,h*0.8, 'right').setScrollFactor(0).setOrigin(-0.5,0.5).setAlpha(0.6).setInteractive();
+            if(options.mobileGamepad.arrows){
+                this.controls={}
+                this.controls.left=this.add.image(75, h-150, 'left').setScrollFactor(0).setAlpha(0.6).setInteractive();
+                this.controls.up=this.add.image(75, h-150, 'up').setScrollFactor(0).setOrigin(0,1).setAlpha(0.6).setInteractive();
+                this.controls.down=this.add.image(75, h-150, 'down').setScrollFactor(0).setOrigin(0,0).setAlpha(0.6).setInteractive();
+                this.controls.right=this.add.image(75, h-150, 'right').setScrollFactor(0).setOrigin(-0.5,0.5).setAlpha(0.6).setInteractive();
+            }else if(options.mobileGamepad.joystic){
+                //Joystick
+                this.joyStick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
+                    x: 100,
+                    y: h-100,
+                    radius: 100,
+                    base: this.add.circle(0, 0, 50, 0x888888).setAlpha(0.8),
+                    thumb: this.add.circle(0, 0, 25, 0xcccccc).setAlpha(0.8),
+                    dir: '4dir',   // 'up&down'|0|'left&right'|1|'4dir'|2|'8dir'|3
+                    forceMin: 16,
+                    enable: true
+                })
+                this.player.body.maxVelocity.set(130);
+            }
+            
         }
 
         //Fullscreen handling
@@ -332,7 +358,7 @@ class Level2 extends Phaser.Scene{
                 canvas.requestFullscreen()
             }
         })
-        
+
     }//end of create Method
 
     update(){
@@ -354,6 +380,9 @@ class Level2 extends Phaser.Scene{
                 x: this.player.x,
                 y: this.player.y
             }
+
+            //Check player position after death
+            this.checkPlayerPositionAfterDeath()
         }
     }
 
@@ -393,6 +422,7 @@ class Level2 extends Phaser.Scene{
             defeatedOpponents: defeatedOpponents,
             oppenedBaus: oppenedBaus,
             defeatedGyms: defeatedGyms,
+            hospitalsVisited: hospitalsVisited,
             
         }
         localStorage.setItem('monsterThatSaveGame', JSON.stringify(saveFile));
@@ -475,66 +505,141 @@ class Level2 extends Phaser.Scene{
                 animation='idle'
             }
         }else{
-            //Left Button
-            this.controls.left.on('pointerdown', ()=>{
-                this.player.setVelocityX(-110);
-                animation='walk';
-                this.player.flipX=true;
-            })
-            this.controls.left.on('pointerup', ()=>{
-                this.player.setVelocityX(0);
-                animation='idle';
-            })
-            this.controls.left.on('pointerout', ()=>{
-                this.player.setVelocityX(0);
-                animation='idle';
-            })
-            //Right Button
-            this.controls.right.on('pointerdown', ()=>{
-                this.player.setVelocityX(110);
-                animation='walk';
-                this.player.flipX=false;
-            })
-            this.controls.right.on('pointerup', ()=>{
-                this.player.setVelocityX(0);
-                animation='idle';
-            })
-            this.controls.right.on('pointerout', ()=>{
-                this.player.setVelocityX(0);
-                animation='idle';
-            })
-            //Up Button
-            this.controls.up.on('pointerdown', ()=>{
-                this.player.setVelocityY(-110);
-                animation='walk';
-                this.player.flipX=true;
-            })
-            this.controls.up.on('pointerup', ()=>{
-                this.player.setVelocityY(0);
-                animation='idle';
-            })
-            this.controls.up.on('pointerout', ()=>{
-                this.player.setVelocityY(0);
-                animation='idle';
-            })
-            //Down Button
-            this.controls.down.on('pointerdown', ()=>{
-                this.player.setVelocityY(110);
-                animation='walk';
-                this.player.flipX=true;
-            })
-            this.controls.down.on('pointerup', ()=>{
-                this.player.setVelocityY(0);
-                animation='idle';
-            })
-            this.controls.down.on('pointerout', ()=>{
-                this.player.setVelocityY(0);
-                animation='idle';
-            })
-        }
-        
+            if(options.mobileGamepad.arrows){
+                //Left Button
+                this.controls.left.on('pointerdown', ()=>{
+                    this.player.setVelocityX(-110);
+                    animation='walk';
+                    this.player.flipX=true;
+                    this.controls.left.setAlpha(0.3)
+                })
+                this.controls.left.on('pointerup', ()=>{
+                    this.player.setVelocityX(0);
+                    animation='idle';
+                    this.controls.left.setAlpha(0.6)
+                })
+                this.controls.left.on('pointerout', ()=>{
+                    this.player.setVelocityX(0);
+                    animation='idle';
+                    this.controls.left.setAlpha(0.6)
+                })
+                //Right Button
+                this.controls.right.on('pointerdown', ()=>{
+                    this.player.setVelocityX(110);
+                    animation='walk';
+                    this.player.flipX=false;
+                    this.controls.right.setAlpha(0.3)
+                })
+                this.controls.right.on('pointerup', ()=>{
+                    this.player.setVelocityX(0);
+                    animation='idle';
+                    this.controls.right.setAlpha(0.6)
+                })
+                this.controls.right.on('pointerout', ()=>{
+                    this.player.setVelocityX(0);
+                    animation='idle';
+                    this.controls.right.setAlpha(0.6)
+                })
+                //Up Button
+                this.controls.up.on('pointerdown', ()=>{
+                    this.player.setVelocityY(-110);
+                    animation='walk';
+                    this.player.flipX=true;
+                    this.controls.up.setAlpha(0.3)
+                })
+                this.controls.up.on('pointerup', ()=>{
+                    this.player.setVelocityY(0);
+                    animation='idle';
+                    this.controls.up.setAlpha(0.6)
+                })
+                this.controls.up.on('pointerout', ()=>{
+                    this.player.setVelocityY(0);
+                    animation='idle';
+                    this.controls.up.setAlpha(0.6)
+                })
+                //Down Button
+                this.controls.down.on('pointerdown', ()=>{
+                    this.player.setVelocityY(110);
+                    animation='walk';
+                    this.player.flipX=true;
+                    this.controls.down.setAlpha(0.3)
+                })
+                this.controls.down.on('pointerup', ()=>{
+                    this.player.setVelocityY(0);
+                    animation='idle';
+                    this.controls.down.setAlpha(0.6)
+                })
+                this.controls.down.on('pointerout', ()=>{
+                    this.player.setVelocityY(0);
+                    animation='idle';
+                    this.controls.down.setAlpha(0.6)
+                })
+            }else if(options.mobileGamepad.joystic){
+                if(this.joyStick.pointer){
+                    const angle= this.joyStick.angle;
+                    const force= this.joyStick.force
+                    //UP and DOWN moves
+                    if(angle<-67.5 && angle>-112.5){//Move only Up
+                        this.player.setVelocityY(-force);
+                        animation='walk';
+                    }else if(angle>67.5 && angle < 112.5){//Move only down
+                        this.player.setVelocityY(force)
+                        animation='walk';
+                    }
+    
+                    //LEFT and RIGHT moves
+                    else if(angle<-157.5  || angle>157.5){ //Move only left
+                        this.player.setVelocityX(-force);
+                        animation='walk';
+                        this.player.flipX=true;
+                    }else if(angle <22.5 && angle >-22.5){ //Move only right
+                        this.player.setVelocityX(force);
+                        animation='walk';
+                        this.player.flipX=false;
+                    }
+                    //DIAGONAL moves
+                    else if(angle<-22.5 && angle>-67.5){ //Move up and right
+                        this.player.setVelocityX(force);
+                        this.player.setVelocityY(-force);
+                        animation='walk';
+                        this.player.flipX=false;
+                    }else if(angle<-112.5 && angle>-157.5 ){ //Moves up and left
+                        this.player.setVelocityX(-force);
+                        this.player.setVelocityY(-force);
+                        animation='walk';
+                        this.player.flipX=true;
+                    }else if(angle>112.5 && angle<157.5){ //Moves down and left
+                        this.player.setVelocityX(-force);
+                        this.player.setVelocityY(force);
+                        animation= 'walk';
+                        this.player.flipX=true;
+                    }else if(angle>22.5 && angle<64.7){//Moves down and right
+                        this.player.setVelocityX(force);
+                        this.player.setVelocityY(force);
+                        animation='walk';
+                        this.player.flipX=false;
+                    }else{
+                        this.player.setVelocityX(0);
+                        this.player.setVelocityY(0);
+                        animation='idle';
+                    }
+    
+                    
+                }else{
+                    this.player.setVelocity(0)
+                }
+            }
+        } 
     }
 
-    
+
+    checkPlayerPositionAfterDeath(){
+        if(victory===false){
+            this.player.x=hospitalsVisited[hospitalsVisited.length-1].x;
+            this.player.y= hospitalsVisited[hospitalsVisited.length-1].y;
+            console.log(hospitalsVisited)
+        }
+        victory=undefined
+    }
 }
 

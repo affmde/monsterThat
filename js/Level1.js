@@ -62,7 +62,12 @@ let playerStats={
 
 const defeatedOpponents=loadData.defeatedOpponents || []
 const oppenedBaus=loadData.oppenedBaus || [];
-const defeatedGyms= loadData.defeatedGyms || []
+const defeatedGyms= loadData.defeatedGyms || [];
+const hospitalsVisited=loadData.hospitalsVisited || [{
+    x:6487,
+    y:7800
+}]
+console.log(hospitalsVisited[hospitalsVisited.length-1])
 
 class Level1 extends Phaser.Scene{
     constructor(){

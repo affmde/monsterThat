@@ -1,11 +1,13 @@
 config={
     type: Phaser.AUTO,
     scale: {
-        mode: Phaser.ScaleModes.FIT,
+        mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: 800,
         height: 450,
     },
+    parent: "gameDiv",
+    fullScreenTarget: document.getElementById('gameDiv'),
     backgroundColor: "b9baff",
     physics: {
       default: 'arcade',
