@@ -99,7 +99,6 @@ class Level2 extends Phaser.Scene{
 
     create(){
         console.log('playerStats: ', playerStats)
-        console.log(newGame)
         //Tilemap creation
         const map = this.make.tilemap({ key: 'tilemap', tileWidth:16, tileHeight: 16 })
         const tileset = map.addTilesetImage('ClassicRPG_Sheet', 'classicTileset');
@@ -119,7 +118,7 @@ class Level2 extends Phaser.Scene{
         }
         this.player.setSize(16,16)
         this.player.setOffset(8,16)
-
+        console.log(this.player.body)
         //Tilemap collisions
         forest.setCollisionByExclusion([0, -1]);
         sea.setCollisionByExclusion([0, -1]);
