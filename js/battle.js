@@ -20,7 +20,7 @@ class Battle extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image(`${currentOponnent.fig}`, `assets/${currentOponnent.fig}.png`);
+        this.load.image(`${currentOponnent.fig}`, `assets/opponents/${currentOponnent.fig}.png`);
         this.load.image('player', 'assets/boy.png');
         this.load.image('bg', 'assets/battleBg.png')
         this.load.image('gymBg', 'assets/gym/gymLeaderBg.png');

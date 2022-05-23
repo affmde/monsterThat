@@ -129,6 +129,25 @@ class Level2 extends Phaser.Scene{
         }]
         console.log(hospitalsVisited[hospitalsVisited.length-1])
 
+        //Array of Animals on the grass
+
+        this.wildAnimals=[
+            {
+                id: 'A0',
+                name: 'Bugger',
+                level: Math.floor(Math.random()*playerStats.level)<1 ? 1 : Math.floor(Math.random()*(playerStats.level+1)),
+                hp: Math.floor(Math.random()*25),
+                fig: 'mashroom'
+            },
+            {
+                id: 'A1',
+                name: 'Gold Racoon',
+                level: Math.floor(Math.random()*playerStats.level)<1 ? 1 : Math.floor(Math.random()*(playerStats.level+2)),
+                hp: Math.floor(Math.random()*30),
+                fig: 'goldRacoon'
+            }
+        ]
+
         console.log('playerStats: ', playerStats)
         //Tilemap creation
         const map = this.make.tilemap({ key: 'tilemap', tileWidth:16, tileHeight: 16 })
@@ -496,13 +515,16 @@ class Level2 extends Phaser.Scene{
             if(currentScene==='Level2'){
                 const rand= Math.floor(Math.random()*1000)
                 if(rand<2 && currentScene==="Level2"){
+                    const randOpponent= Math.floor(Math.random()*(this.wildAnimals.length))
+                    console.log(randOpponent)
+                    console.log(this.wildAnimals.length)
                     currentScene='Battle';
-                    currentOponnent.id="A"
-                    currentOponnent.name= "Bugger";
-                    currentOponnent.hp=Math.floor(Math.random()*25);
+                    currentOponnent.id=this.wildAnimals[randOpponent].id;
+                    currentOponnent.name= this.wildAnimals[randOpponent].name;
+                    currentOponnent.hp=this.wildAnimals[randOpponent].hp;
                     currentOponnent.moneyReturn=0;
-                    currentOponnent.level=Math.floor(Math.random()*playerStats.level)<1 ? 1 : Math.floor(Math.random()*playerStats.level);
-                    currentOponnent.fig= 'mashroom';
+                    currentOponnent.level=this.wildAnimals[randOpponent].level;
+                    currentOponnent.fig= this.wildAnimals[randOpponent].fig;
                     currentOponnent.type='Bug';
                     this.scene.pause();
                     this.scene.launch('Battle'); 
