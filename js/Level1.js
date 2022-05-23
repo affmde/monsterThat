@@ -36,8 +36,8 @@ let playerStartingStats={
     
 }
 
-const loadData= loadGame()!==undefined ? loadGame() : playerStartingStats;
-console.log(loadData)
+//const loadData= loadGame()!==undefined ? loadGame() : playerStartingStats;
+//console.log(loadData)
 
 let currentOponnent={};
 let currentHospital={};
@@ -45,7 +45,7 @@ let currentShop= {};
 
 
 let playerStats={
-    level: loadData.player.level || 1,
+    /*level: loadData.player.level || 1,
     money: loadData.player.money || 100,
     hp: loadData.player.hp || 75,
     maxHp: loadData.player.maxHp || 75,
@@ -58,17 +58,14 @@ let playerStats={
     },
     xp: loadData.player.xp || 0,
     attackBase: loadData.player.attackBase || 2,
-    recoverBase: loadData.player.recoverBase || 10
+    recoverBase: loadData.player.recoverBase || 10*/
 }
 
-const defeatedOpponents=loadData.defeatedOpponents || []
-const oppenedBaus=loadData.oppenedBaus || [];
-const defeatedGyms= loadData.defeatedGyms || [];
-const hospitalsVisited=loadData.hospitalsVisited || [{
-    x:6487,
-    y:7800
-}]
-console.log(hospitalsVisited[hospitalsVisited.length-1])
+let defeatedOpponents;
+let oppenedBaus;
+let defeatedGyms;
+let hospitalsVisited;
+
 
 class Level1 extends Phaser.Scene{
     constructor(){

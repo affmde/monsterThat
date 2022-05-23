@@ -98,6 +98,35 @@ class Level2 extends Phaser.Scene{
     }
 
     create(){
+        //Load Data
+        const loadData= loadGame()!==undefined ? loadGame() : playerStartingStats;
+        console.log(loadData)
+        playerStats={
+            level: loadData.player.level || 1,
+            money: loadData.player.money || 100,
+            hp: loadData.player.hp || 75,
+            maxHp: loadData.player.maxHp || 75,
+            items:{
+                stone: loadData.player.items.stone || 0,
+                meat: loadData.player.items.meat || 0,
+                water: loadData.player.items.water || 0,
+                wood: loadData.player.items.wood || 0,
+                herbs: loadData.player.items.herbs || 0
+            },
+            xp: loadData.player.xp || 0,
+            attackBase: loadData.player.attackBase || 2,
+            recoverBase: loadData.player.recoverBase || 10
+        }
+
+        defeatedOpponents=loadData.defeatedOpponents || []
+        oppenedBaus=loadData.oppenedBaus || [];
+        defeatedGyms= loadData.defeatedGyms || [];
+        hospitalsVisited=loadData.hospitalsVisited || [{
+            x:6487,
+            y:7800
+        }]
+        console.log(hospitalsVisited[hospitalsVisited.length-1])
+
         console.log('playerStats: ', playerStats)
         //Tilemap creation
         const map = this.make.tilemap({ key: 'tilemap', tileWidth:16, tileHeight: 16 })
