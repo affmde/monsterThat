@@ -47,14 +47,13 @@ class Battle extends Phaser.Scene{
         //Opponent
         opponent= this.add.image(w*0.75,h*0.38 , `${currentOponnent.fig}`).setScale(4).setOrigin(0.5).setInteractive();
         texts.opponentName = this.add.text(w*0.75, h*0.15, currentOponnent.name, {fontSize: 28, color: currentOponnent.type==='Bug' ? 'black' : 'white'}).setOrigin(0.5)
-        texts.opponentLevel = this.add.text(w*0.69, h*0.22, `Lvl: ${currentOponnent.level}`, {fontSize: 20, color: currentOponnent.type==='Bug' ? 'black' : 'white'}).setOrigin(0.5);
+        texts.opponentLevel = this.add.text(w*0.75, h*0.08, `Lvl: ${currentOponnent.level}`, {fontSize: 20, color: currentOponnent.type==='Bug' ? 'black' : 'white'}).setOrigin(0.5);
         this.actualHp=currentOponnent.hp;
         
         //Player
         player= this.add.image(w*0.13, h*0.83, 'player').setScale(4).setOrigin(0.5);
         texts.playerName= this.add.text(w*0.13,h*0.63, 'Player 1', {fontSize: 28}). setOrigin(0.5);
         texts.playerLevel = this.add.text(h*0.13, h*0.7, `Lvl: ${playerStats.level}`, {fontSize: 20}).setOrigin(0.5)
-        texts.playerHp= this.add.text(h*0.35, h*0.7, `Hp: ${playerStats.hp}`, {fontSize: 20}).setOrigin(0.5)
         this.playerEnergy=0;
         //Attacks
         this.swords= this.add.image(w*0.33, h*0.83, 'swords').setInteractive().setAlpha(0);
@@ -80,7 +79,7 @@ class Battle extends Phaser.Scene{
                 let pointerX= this.input.activePointer.x;
                 let pointerY= this.input.activePointer.y;
                 console.log('pointer: ', pointerX, pointerY)
-                this.circle= this.add.image(pointerX, pointerY, 'circle').setOrigin(0.5)
+                this.circle= this.add.image(pointerX, pointerY, 'circle').setOrigin(0.5).setScale(2)
         })
 
         opponent.on('pointerup', ()=>{
@@ -149,8 +148,8 @@ class Battle extends Phaser.Scene{
         this.maxLifeRect= this.add.rectangle(w*0.7, h*0.22, 150, 8, 0xFF0000 ).setOrigin(0, 0.5);
         this.currentLifeRect= this.add.rectangle(w*0.7, h*0.22, 150*this.actualHp/currentOponnent.hp,8, 0x7CFC00).setOrigin(0,0.5);
         //Player live bar
-        this.playerMaxLifeRect= this.add.rectangle(w*0.20, h*0.7, 150, 8, 0xFF0000 ).setOrigin(0,0.5);
-        this.playerCurrentLifeRect= this.add.rectangle(w*0.20, h*0.7, 150*playerStats.hp/playerStats.maxHp,8, 0x7CFC00).setOrigin(0,0.5);
+        this.playerMaxLifeRect= this.add.rectangle(w*0.16, h*0.7, 150, 8, 0xFF0000 ).setOrigin(0,0.5);
+        this.playerCurrentLifeRect= this.add.rectangle(w*0.16, h*0.7, 150*playerStats.hp/playerStats.maxHp,8, 0x7CFC00).setOrigin(0,0.5);
         //Allow mega sword attack
         if(this.playerEnergy>100){
             this.swords.setInteractive();
@@ -320,9 +319,9 @@ class Battle extends Phaser.Scene{
     handleOpponentDamage(){
         let damage;
         if(currentOponnent.type==='GymLeader'){
-            damage=Math.floor(Math.random()*currentOponnent.level)+(Math.floor(Math.random()*10))
+            damage=Math.floor(Math.random()*currentOponnent.level)+(Math.floor(Math.random()*8))
         }else if(currentOponnent.type==='Trainer'){
-            damage=Math.floor(Math.random()*(currentOponnent.level+5))
+            damage=Math.floor(Math.random()*(currentOponnent.level+3))
         }else if(currentOponnent.type==='Bug'){
             damage=Math.floor(Math.random()*(currentOponnent.level))+0.05
         }

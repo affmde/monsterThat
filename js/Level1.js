@@ -35,6 +35,7 @@ let playerStartingStats={
     }
     
 }
+
 const loadData= loadGame()!==undefined ? loadGame() : playerStartingStats;
 console.log(loadData)
 
@@ -266,7 +267,7 @@ const handleItemsReward = () =>{
         stone: Math.floor(Math.random()*(playerStats.level+5)),
         water: Math.floor(Math.random()*(playerStats.level+5)),
         herbs: Math.floor(Math.random()*(playerStats.level+5)),
-        money: Math.floor(Math.random()*(playerStats.level+100))
+        money: Math.floor(Math.random()*(playerStats.level+20))
     }
     
     playerStats.items={
