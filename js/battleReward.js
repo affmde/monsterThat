@@ -29,6 +29,13 @@ class BattleReward extends Phaser.Scene{
         }
 
         opponent= this.add.image(w*0.3,h*0.5 , `${currentOponnent.fig}`).setScale(4).setOrigin(0.5);
+        this.talkArray=["Ok you were good, I didn't stand a change. Here are your rewards.", 
+                        "Ahh damn it! Congrats. Here are your rewards.",
+                        "I want a revenge. You can't be better than me. I will give you the following anyway.",
+                        "Ohh no. Never expected this result. Here are your rewards.",
+                        "Ohoh, you were good. Maybe you stand a chance to find the Princess. Take your rewards.",
+                        "Well.. I have to learn with the better ones. Here are your rewards."
+                    ]
         
         this.rect= this.add.rectangle(w*0.5, h*0.1, w*0.4, h*0.8, 0xFFFFFF).setOrigin(0.0).setAlpha(0)
         this.rewardsText= this.add.text(w*0.75, h*0.2, "Your Rewards:", {fontSize: 30, color: 'black'}).setOrigin(0.5).setAlpha(0);
@@ -57,7 +64,8 @@ class BattleReward extends Phaser.Scene{
 
                 this.continueBTN= this.add.text(w*0.75, h*0.85, 'Continue', {fontSize: 25, color: 'black'}).setInteractive().setAlpha(0).setOrigin(0.5)
             }else{
-                const dialog= new DialogBox(this, "Ok you were good, I didn't stand a change. Here are your rewards", null, null, null);
+                const rand= Math.floor(Math.random()*this.talkArray.length-1)
+                const dialog= new DialogBox(this, this.talkArray[rand], null, null, null);
                 this.battleReward= handleBattleReward(this.randExp, this.moneyReturn)
                 console.log(this.battleReward)
                 this.rewardsText2= this.add.text(w*0.55,h*0.4, `Money: ${this.moneyReturn}€`, {fontSize: 25, color: 'black'}).setOrigin(0).setAlpha(0);

@@ -21,7 +21,7 @@ class Battle extends Phaser.Scene{
 
     preload(){
         this.load.image(`${currentOponnent.fig}`, `assets/${currentOponnent.fig}.png`);
-        this.load.image('player', 'assets/bandit.png');
+        this.load.image('player', 'assets/boy.png');
         this.load.image('bg', 'assets/battleBg.png')
         this.load.image('gymBg', 'assets/gym/gymLeaderBg.png');
         this.load.image('bg2', 'assets/battlebg2.png');
@@ -158,15 +158,16 @@ class Battle extends Phaser.Scene{
 
         if(this.actualHp<=0){
             victory=true;
-                this.actualHp=0;
-                opponent.disableInteractive();
-                opponent.setAlpha(0.7)
-                clearInterval(this.opponentAttack)
-                this.heartRecover.disableInteractive();
-                this.heartRecover.setAlpha(1);
-                this.activeHeart && clearTimeout(this.activeHeart)
-                this.scene.stop();
-                this.scene.start('BattleReward')
+            this.playerEnergy=0;
+            this.actualHp=0;
+            opponent.disableInteractive();
+            opponent.setAlpha(0.7)
+            clearInterval(this.opponentAttack)
+            this.heartRecover.disableInteractive();
+            this.heartRecover.setAlpha(1);
+            this.activeHeart && clearTimeout(this.activeHeart)
+            this.scene.stop();
+            this.scene.start('BattleReward')
         }
     }
 

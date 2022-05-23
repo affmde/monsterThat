@@ -72,6 +72,8 @@ class Level2 extends Phaser.Scene{
         this.load.tilemapTiledJSON('tilemap', 'assets/world2.json');
         this.load.atlas('bandit', 'assets/players/bandit.png', 'assets/players/bandit_atlas.json');
         this.load.animation('bandit_anim', 'assets/players/bandit_anim.json');
+        this.load.atlas('boy', 'assets/players/boy.png', 'assets/players/boy_atlas.json');
+        this.load.animation('boy_anim', 'assets/players/boy_anim.json');
         this.load.image('ranger', 'assets/ranger.png');
         this.load.image('elf', 'assets/elf.png')<
         this.load.image('closedBau', 'assets/closedBau.png');
@@ -141,12 +143,11 @@ class Level2 extends Phaser.Scene{
 
         //Player creation
         if(newGame===false){
-            this.player=this.physics.add.sprite(loadData.x || 6487,loadData.y || 7980, 'bandit');
+            this.player=this.physics.add.sprite(loadData.x || 6487,loadData.y || 7980, 'boy');
         }else{
-            this.player=this.physics.add.sprite(6487, 7800, 'bandit');
+            this.player=this.physics.add.sprite(6487, 7800, 'boy');
         }
-        this.player.setSize(16,16)
-        this.player.setOffset(8,16)
+        
         console.log(this.player.body)
         //Tilemap collisions
         forest.setCollisionByExclusion([0, -1]);
@@ -511,10 +512,16 @@ class Level2 extends Phaser.Scene{
     }
 
     checkAnimation(){
-        if(animation==='idle'){
-            this.player.anims.play('bandit_idle', true)
-        }else if(animation==='walk'){
-            this.player.anims.play('bandit_walk', true)
+        if(animation==='left'){
+            this.player.anims.play('boy_left', true)
+        }else if(animation==='right'){
+            this.player.anims.play('boy_right', true)
+        }else if(animation==='up'){
+            this.player.anims.play('boy_up', true)
+        }else if(animation==='down'){
+            this.player.anims.play('boy_down', true)
+        }else{
+            return
         }
     }
 
@@ -523,34 +530,35 @@ class Level2 extends Phaser.Scene{
         if(device==="desktop"){
             if(cursors.up.isDown){
                 this.player.setVelocityY(-110)
-                animation='walk'
+
+                animation='up';
             }else if(cursors.down.isDown){
                 this.player.setVelocityY(110);
-                animation='walk';
+                animation='down';
             }else{
                 this.player.setVelocityY(0)
-                animation='idle'
+                
             }
     
             if(cursors.left.isDown){
                 this.player.setVelocityX(-110);
-                animation='walk';
-                this.player.flipX=true;
+                animation='left';
+                this.player.flipX=false;
             }else if(cursors.right.isDown){
                 this.player.setVelocityX(110);
                 this.player.flipX=false;
-                animation='walk';
+                animation='right';
             }else{
                 this.player.setVelocityX(0)
-                animation='idle'
+                
             }
         }else{
             if(options.mobileGamepad.arrows){
                 //Left Button
                 this.controls.left.on('pointerdown', ()=>{
                     this.player.setVelocityX(-110);
-                    animation='walk';
-                    this.player.flipX=true;
+                    animation='left';
+                    this.player.flipX=false;
                     this.controls.left.setAlpha(0.3)
                 })
                 this.controls.left.on('pointerup', ()=>{
@@ -566,7 +574,7 @@ class Level2 extends Phaser.Scene{
                 //Right Button
                 this.controls.right.on('pointerdown', ()=>{
                     this.player.setVelocityX(110);
-                    animation='walk';
+                    animation='right';
                     this.player.flipX=false;
                     this.controls.right.setAlpha(0.3)
                 })
@@ -583,7 +591,7 @@ class Level2 extends Phaser.Scene{
                 //Up Button
                 this.controls.up.on('pointerdown', ()=>{
                     this.player.setVelocityY(-110);
-                    animation='walk';
+                    animation='down';
                     this.player.flipX=true;
                     this.controls.up.setAlpha(0.3)
                 })
@@ -600,7 +608,7 @@ class Level2 extends Phaser.Scene{
                 //Down Button
                 this.controls.down.on('pointerdown', ()=>{
                     this.player.setVelocityY(110);
-                    animation='walk';
+                    animation='up';
                     this.player.flipX=true;
                     this.controls.down.setAlpha(0.3)
                 })
@@ -621,42 +629,42 @@ class Level2 extends Phaser.Scene{
                     //UP and DOWN moves
                     if(angle<-67.5 && angle>-112.5){//Move only Up
                         this.player.setVelocityY(-force);
-                        animation='walk';
+                        animation='up';
                     }else if(angle>67.5 && angle < 112.5){//Move only down
                         this.player.setVelocityY(force)
-                        animation='walk';
+                        animation='down';
                     }
     
                     //LEFT and RIGHT moves
                     else if(angle<-157.5  || angle>157.5){ //Move only left
                         this.player.setVelocityX(-force);
-                        animation='walk';
+                        animation='left';
                         this.player.flipX=true;
                     }else if(angle <22.5 && angle >-22.5){ //Move only right
                         this.player.setVelocityX(force);
-                        animation='walk';
+                        animation='right';
                         this.player.flipX=false;
                     }
                     //DIAGONAL moves
                     else if(angle<-22.5 && angle>-67.5){ //Move up and right
                         this.player.setVelocityX(force);
                         this.player.setVelocityY(-force);
-                        animation='walk';
+                        animation='right';
                         this.player.flipX=false;
                     }else if(angle<-112.5 && angle>-157.5 ){ //Moves up and left
                         this.player.setVelocityX(-force);
                         this.player.setVelocityY(-force);
-                        animation='walk';
+                        animation='left';
                         this.player.flipX=true;
                     }else if(angle>112.5 && angle<157.5){ //Moves down and left
                         this.player.setVelocityX(-force);
                         this.player.setVelocityY(force);
-                        animation= 'walk';
+                        animation= 'left';
                         this.player.flipX=true;
                     }else if(angle>22.5 && angle<64.7){//Moves down and right
                         this.player.setVelocityX(force);
                         this.player.setVelocityY(force);
-                        animation='walk';
+                        animation='right';
                         this.player.flipX=false;
                     }else{
                         this.player.setVelocityX(0);

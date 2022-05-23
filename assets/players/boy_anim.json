@@ -1,0 +1,100 @@
+{
+    "anims": [
+        {
+            "key": "boy_down",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "boy",
+                    "frame": "walk_1"
+                },
+                {
+                    "key": "boy",
+                    "frame": "walk_2"
+                },
+                {
+                    "key": "boy",
+                    "frame": "walk_3"
+                },
+                {
+                    "key": "boy",
+                    "frame": "walk_4"
+                }
+            ]
+        },
+        {
+            "key": "boy_up",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "boy",
+                    "frame": "up_1"
+                },
+                {
+                    "key": "boy",
+                    "frame": "up_4"
+                },
+                {
+                    "key": "boy",
+                    "frame": "up_3"
+                },
+                {
+                    "key": "boy",
+                    "frame": "up_2"
+                }
+            ]
+        },
+        {
+            "key": "boy_right",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "boy",
+                    "frame": "right_1"
+                },
+                {
+                    "key": "boy",
+                    "frame": "right_4"
+                },
+                {
+                    "key": "boy",
+                    "frame": "right_3"
+                },
+                {
+                    "key": "boy",
+                    "frame": "right_2"
+                }
+            ]
+        },
+        {
+            "key": "boy_left",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "boy",
+                    "frame": "left_1"
+                },
+                {
+                    "key": "boy",
+                    "frame": "left_4"
+                },
+                {
+                    "key": "boy",
+                    "frame": "left_3"
+                },
+                {
+                    "key": "boy",
+                    "frame": "left_2"
+                }
+            ]
+        }
+    ]
+}
