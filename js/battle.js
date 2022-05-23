@@ -324,7 +324,7 @@ class Battle extends Phaser.Scene{
         }else if(currentOponnent.type==='Trainer'){
             damage=Math.floor(Math.random()*(currentOponnent.level+5))
         }else if(currentOponnent.type==='Bug'){
-            damage=Math.floor(Math.random()*(currentOponnent.level))+0.5
+            damage=Math.floor(Math.random()*(currentOponnent.level))+0.05
         }
         console.log(damage)
         return damage

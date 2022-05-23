@@ -24,6 +24,7 @@ class StartScene extends Phaser.Scene{
         });
         const newGameText= this.add.text(w/2, h*0.68, 'New game', {fontSize: 25}).setOrigin(0.5).setInteractive();
         newGameText.on('pointerdown', ()=>{
+            localStorage.removeItem('monsterThatSaveGame')
             newGame=true;
             const gameDiv= document.getElementById('gameDiv');
             gameDiv.addEventListener('click', ()=>{
