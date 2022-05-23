@@ -1,9 +1,10 @@
 let timeEventText =undefined;
-
+let textOn= false;
 class DialogBox extends Phaser.GameObjects.Container{
     constructor(scene, text,launchScene, pauseScene, stopScene){
         super(scene)
         this.scene=scene;
+        textOn=true;
 
         const rectangle= this.scene.add.rectangle(w*0.03, h*0.75, w*0.88, h*0.19, 0xFFFFFF)
             .setOrigin(0)
@@ -27,7 +28,7 @@ class DialogBox extends Phaser.GameObjects.Container{
             }else{
                 rectangle.destroy();
                 this.txt.destroy();
-                
+                textOn=false;
                 if(pauseScene){
                     this.scene.scene.pause(pauseScene)
                     this.scene.scene.launch(launchScene)

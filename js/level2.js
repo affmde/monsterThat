@@ -151,6 +151,7 @@ class Level2 extends Phaser.Scene{
                     currentOponnent.type='Trainer';
                     currentScene='Battle';
                     this.checkDefeatedTrainers(trainer.id)
+                    this.player.setVelocity(0)
                           
                 }
                 
@@ -178,6 +179,7 @@ class Level2 extends Phaser.Scene{
                     currentOponnent.type='Trainer';
                     currentScene='Battle';
                     this.checkDefeatedTrainers(trainer.id)
+                    this.player.setVelocity(0)
                 }
                 
             })
@@ -261,7 +263,12 @@ class Level2 extends Phaser.Scene{
                 if(this.checkDefeatedGyms(newGuard.gymNumber)){
                     newGuard.destroy()
                 }else{
-                    const rec= new DialogBox(this, 'You must defeat the city Gym Leader if you want to go ahead!', null, null)
+                    if(textOn===false){
+                        const rec= new DialogBox(this, 'You must defeat the city Gym Leader if you want to go ahead!', null, null)
+                    }else{
+                        return
+                    }
+                    
                 }
                 
             })
@@ -298,6 +305,11 @@ class Level2 extends Phaser.Scene{
                 currentScene="Shop";
                 const dialog= new DialogBox(this, 'Hmm.. a shop! Maybe i can buy something here.', 'Shop', 'Level2', null)
             })
+        })
+
+        //Add texts to gym, hospitals and shops
+        map.getObjectLayer('texts').objects.forEach(text=>{
+            this.add.text(text.x, text.y, text.text.text).setOrigin(0)
         })
 
 

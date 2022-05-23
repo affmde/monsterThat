@@ -78,8 +78,9 @@ class PauseMenu extends Phaser.Scene{
         if(this.showMenu.stats){
             const rectangle= this.add.rectangle(0,0,w*0.5,h, 0xffffff).setScrollFactor(0).setOrigin(0);
             const statsText= this.add.text(w*0.25, h*0.125, 'Stats', {fontSize: 30, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
-            const levelText= this.add.text(w*0.25, h*0.3125, `Level: ${playerStats.level}`, {fontSize: 25, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
-            const hpText= this.add.text(w*0.25, h*0.415, `Hp: ${playerStats.hp}`, {fontSize: 25, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
+            const hpText= this.add.text(w*0.20, h*0.415, 'Hp: ', {fontSize: 30, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
+            this.playerMaxLifeRect= this.add.rectangle(w*0.25, h*0.415, 150, 8, 0xFF0000 ).setOrigin(0,0.5);
+            this.playerCurrentLifeRect= this.add.rectangle(w*0.25, h*0.415, 150*playerStats.hp/playerStats.maxHp,8, 0x7CFC00).setOrigin(0,0.5);
             const maxHpText= this.add.text(w*0.25, h*0.5175, `Max Hp: ${playerStats.maxHp}`, {fontSize: 25, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
             const moneyText= this.add.text(w*0.25, h*0.61, `Money: ${playerStats.money}€`, {fontSize: 25, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
             const xpText= this.add.text(w*0.25, h*0.7125, `XP: ${playerStats.xp}`, {fontSize: 25, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
@@ -105,13 +106,14 @@ class PauseMenu extends Phaser.Scene{
             const badgesText= this.add.text(rectangle.width/2, h*0.125, 'Badges', {fontSize: 30, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
             const badge1= this.add.image(w*0.15, h*0.40, 'badge1').setScrollFactor(0);
             const badge2= this.add.image(w*0.35, h*0.40, 'badge2').setScrollFactor(0);
-            const badge3= this.add.image(w*0.55, h*0.40, 'badge3').setScrollFactor(0).setTint(0x000000).setAlpha(0.8);
+            const badge3= this.add.image(w*0.55, h*0.40, 'badge3').setScrollFactor(0);
             const badge4= this.add.image(w*0.15, h*0.70, 'badge4').setScrollFactor(0).setTint(0x000000).setAlpha(0.8);
             const badge5= this.add.image(w*0.35, h*0.70, 'badge5').setScrollFactor(0).setTint(0x000000).setAlpha(0.8);
             const badge6= this.add.image(w*0.55, h*0.70, 'badge6').setScrollFactor(0).setTint(0x000000).setAlpha(0.8);
 
             this.checkForBadges(33)? badge1.setTint(0xFFFFFF).setAlpha(1) :badge1.setTint(0x000000).setAlpha(0.8);
             this.checkForBadges(87)? badge2.setTint(0xFFFFFF).setAlpha(1) :badge2.setTint(0x000000).setAlpha(0.8);
+            this.checkForBadges(157)? badge3.setTint(0xFFFFFF).setAlpha(1) :badge3.setTint(0x000000).setAlpha(0.8);
         }
     }
 

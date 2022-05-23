@@ -20,8 +20,8 @@ let playerStartingStats={
     player:{
         level: 1,
         money: 100,
-        hp: 25,
-        maxHp: 25,
+        hp: 75,
+        maxHp: 75,
         items:{
             stone: 0,
             meat: 0,
@@ -30,7 +30,7 @@ let playerStartingStats={
             herbs: 0
         },
         xp: 0,
-        attackBase: 4,
+        attackBase: 2,
         recoverBase: 10
     }
     
@@ -46,8 +46,8 @@ let currentShop= {};
 let playerStats={
     level: loadData.player.level || 1,
     money: loadData.player.money || 100,
-    hp: loadData.player.hp || 25,
-    maxHp: loadData.player.maxHp || 25,
+    hp: loadData.player.hp || 75,
+    maxHp: loadData.player.maxHp || 75,
     items:{
         stone: loadData.player.items.stone || 0,
         meat: loadData.player.items.meat || 0,
@@ -56,7 +56,7 @@ let playerStats={
         herbs: loadData.player.items.herbs || 0
     },
     xp: loadData.player.xp || 0,
-    attackBase: loadData.player.attackBase || 4,
+    attackBase: loadData.player.attackBase || 2,
     recoverBase: loadData.player.recoverBase || 10
 }
 
