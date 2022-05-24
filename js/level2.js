@@ -352,8 +352,10 @@ class Level2 extends Phaser.Scene{
             immovable: true
         });
         map.getObjectLayer('shops').objects.forEach(shop=>{
-            const newShop= shops.create(shop.x,shop.y, 'guard').setAlpha(0.1).setOrigin(0.5,0.8)
+            const newShop= shops.create(shop.x,shop.y, 'guard').setAlpha(0.1).setOrigin(0.5,1)
             this.physics.add.collider(newShop, this.player, ()=>{
+                this.player.y=this.player.y+10;
+                animation='down'
                 currentScene="Shop";
                 const dialog= new DialogBox(this, 'Hmm.. a shop! Maybe i can buy something here.', 'Shop', 'Level2', null)
             })
@@ -677,7 +679,7 @@ class Level2 extends Phaser.Scene{
                     else if(angle<-157.5  || angle>157.5){ //Move only left
                         this.player.setVelocityX(-force);
                         animation='left';
-                        this.player.flipX=true;
+                        this.player.flipX=false;
                     }else if(angle <22.5 && angle >-22.5){ //Move only right
                         this.player.setVelocityX(force);
                         animation='right';
@@ -693,12 +695,12 @@ class Level2 extends Phaser.Scene{
                         this.player.setVelocityX(-force);
                         this.player.setVelocityY(-force);
                         animation='left';
-                        this.player.flipX=true;
+                        this.player.flipX=false;
                     }else if(angle>112.5 && angle<157.5){ //Moves down and left
                         this.player.setVelocityX(-force);
                         this.player.setVelocityY(force);
                         animation= 'left';
-                        this.player.flipX=true;
+                        this.player.flipX=false;
                     }else if(angle>22.5 && angle<64.7){//Moves down and right
                         this.player.setVelocityX(force);
                         this.player.setVelocityY(force);

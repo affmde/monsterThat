@@ -64,7 +64,7 @@ class BattleReward extends Phaser.Scene{
 
                 this.continueBTN= this.add.text(w*0.75, h*0.85, 'Continue', {fontSize: 25, color: 'black'}).setInteractive().setAlpha(0).setOrigin(0.5)
             }else{
-                const rand= Math.floor(Math.random()*this.talkArray.length-1)
+                const rand= Math.floor(Math.random()*(this.talkArray.length-1))
                 const dialog= new DialogBox(this, this.talkArray[rand], null, null, null);
                 this.battleReward= handleBattleReward(this.randExp, this.moneyReturn)
                 console.log(this.battleReward)
