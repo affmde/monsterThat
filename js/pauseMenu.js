@@ -83,7 +83,8 @@ class PauseMenu extends Phaser.Scene{
             this.playerCurrentLifeRect= this.add.rectangle(w*0.25, h*0.415, 150*playerStats.hp/playerStats.maxHp,8, 0x7CFC00).setOrigin(0,0.5);
             const maxHpText= this.add.text(w*0.25, h*0.5175, `Max Hp: ${playerStats.maxHp}`, {fontSize: 25, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
             const moneyText= this.add.text(w*0.25, h*0.61, `Money: ${playerStats.money}€`, {fontSize: 25, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
-            const xpText= this.add.text(w*0.25, h*0.7125, `XP: ${playerStats.xp}`, {fontSize: 25, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
+            const xpText= this.add.text(w*0.25, h*0.7125, `XP: ${Math.floor(playerStats.xp)}`, {fontSize: 25, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
+            const lvlText= this.add.text(w*0.25, h*0.81, `Lvl: ${playerStats.level}`, {fontSize: 25, color: 'black'}).setOrigin(0.5).setScrollFactor(0);
         }else if(this.showMenu.items){
             const rectangle= this.add.rectangle(0,0,w*0.5,h, 0xffffff).setScrollFactor(0).setOrigin(0);
             const itemsText= this.add.text(w*0.25, h*0.125, 'Items', {fontSize: 30, color: 'black'}).setOrigin(0.5).setScrollFactor(0);

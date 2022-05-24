@@ -253,7 +253,9 @@ const handleBattleReward = (xp, money) =>{
     const lvl=playerStats.level;
     playerStats.level=checkLevel()
     if(lvl<playerStats.level){
-        playerStats.maxHp+=5+playerStats.level*2
+        playerStats.maxHp+=5+playerStats.level
+        playerStats.attackBase+=1;
+        playerStats.recoverBase+=playerStats.level
     }
 }
 

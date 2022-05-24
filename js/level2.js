@@ -720,7 +720,7 @@ class Level2 extends Phaser.Scene{
     checkPlayerPositionAfterDeath(){
         if(victory===false){
             this.player.x=hospitalsVisited[hospitalsVisited.length-1].x;
-            this.player.y= hospitalsVisited[hospitalsVisited.length-1].y;
+            this.player.y= hospitalsVisited[hospitalsVisited.length-1].y+5;
             console.log(hospitalsVisited)
         }
         victory=undefined
