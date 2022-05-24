@@ -6,6 +6,7 @@ let guards;
 let polices;
 let hospitals;
 let shops;
+let princessPlaces;
 let showStats=false;
 let currentScene='Level2'
 let playerPosition={}
@@ -353,6 +354,19 @@ class Level2 extends Phaser.Scene{
             this.physics.add.collider(newShop, this.player, ()=>{
                 currentScene="Shop";
                 const dialog= new DialogBox(this, 'Hmm.. a shop! Maybe i can buy something here.', 'Shop', 'Level2', null)
+            })
+        })
+
+        //Create PrincessPlace
+        princessPlaces= this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        });
+        map.getObjectLayer('princessPlace').objects.forEach(place=>{
+            const newPlace= princessPlaces.create(place.x,place.y, 'guard').setAlpha(0.1).setOrigin(0.5,0.8)
+            this.physics.add.collider(newPlace, this.player, ()=>{
+                currentScene="PrincessRescue";
+                const dialog= new DialogBox(this, "THis must be the place. Let's get in and rescue the princess.", 'PrincessRescue', 'Level2', null)
             })
         })
 

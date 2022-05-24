@@ -22,8 +22,8 @@ class RecoverScene extends Phaser.Scene{
             },3000)
         }else{
             this.add.image(0,0, 'hospitalBg').setOrigin(0)
-            this.add.text(w*0.025,h*0.125, 'You were found inconscient in the street \r\n\and brought to the hospital', {fontSize: 28*0.5625});
-            this.add.text(w*0.025,h*0.3125, `Your recover costed you: \r\n ${cost}€`, {fontSize: 25*0.5625})
+            this.add.text(w*0.025,h*0.125, 'You were found inconscient in the street and brought to the hospital', {fontSize: 30, color: 'black', lineSpacing: 10, wordWrap: { width: 680, useAdvancedWrap: true }});
+            this.add.text(w*0.025,h*0.3125, `Your recover costed you: \r\n ${cost}€`, {fontSize: 30, color: 'black', lineSpacing: 10, wordWrap: { width: 680, useAdvancedWrap: true }})
 
             playerStats.money-=cost;
             playerStats.hp=playerStats.maxHp;
