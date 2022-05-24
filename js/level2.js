@@ -274,6 +274,7 @@ class Level2 extends Phaser.Scene{
             allowGravity: false,
             immovable: true
         });
+        
         map.getObjectLayer('gyms').objects.forEach(gym=>{
             const newGym = gyms.create(gym.x, gym.y, 'elf').setAlpha(0.1).setOrigin(0,1)
             newGym.properties=gym.properties
@@ -289,7 +290,7 @@ class Level2 extends Phaser.Scene{
                     currentOponnent.level=gym.properties[3].value;
                     currentOponnent.name=gym.properties[0].value
                     currentOponnent.id=gym.id
-                    currentOponnent.fig= 'Leader1';
+                    currentOponnent.fig= gym.properties[0].value;
                     currentOponnent.type='GymLeader'
                     currentScene='Battle';
                     this.checkDefeatedGyms(gym.id)
@@ -333,6 +334,7 @@ class Level2 extends Phaser.Scene{
             const newHospital = hospitals.create(hospital.x, hospital.y, 'guard').setAlpha(0.1).setOrigin(0,1);
             this.physics.add.collider(newHospital, this.player, (hosp, player)=>{
                 this.player.y=this.player.y+10;
+                this.player.setVelocity(0)
                 animation='down'
                 currentScene="Hospital"
                 currentHospital={

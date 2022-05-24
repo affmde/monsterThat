@@ -30,7 +30,7 @@ class Shop extends Phaser.Scene{
         hpItems.forEach((item, i)=>{
             this.add.image(w*0.4375+(i*w*0.075), h*0.3125, item).setScale(0.5*0.5625).setOrigin(0.5)
         })
-        const hpCosts=[100,50,40]
+        const hpCosts=[200,100,120]
         hpCosts.forEach((item, i)=>{
             this.add.text(w*0.4375+(w*0.075*i), h*0.3375, `x${item}`).setOrigin(0.5)
         })
@@ -38,10 +38,10 @@ class Shop extends Phaser.Scene{
         const buyBtn= this.add.text(w*0.5, h*0.4, 'Buy', {fontSize: 30*0.5625}).setOrigin(0.5)
 
         btnBg.on('pointerup', ()=>{
-            if(playerStats.items.wood-100>0 && playerStats.items.meat-50>0 && playerStats.items.stone-40>0){
-                playerStats.items.wood-=100;
-                playerStats.items.meat-=50;
-                playerStats.items.stone-=40;
+            if(playerStats.items.wood-200>0 && playerStats.items.meat-100>0 && playerStats.items.stone-120>0){
+                playerStats.items.wood-=200;
+                playerStats.items.meat-=100;
+                playerStats.items.stone-=120;
                 playerStats.maxHp+=5
                 const rect2=this.add.rectangle(w*0.5,h*0.5, w*0.5,h*0.5, 0xffffff).setOrigin(0.5).setInteractive();
                 const txtMessage= this.add.text(w*0.50625,h*0.50625, 'Bought completed!', {fontSize: 25, color:'black', lineSpacing: 10 , wordWrap: { width: w*0.5, useAdvancedWrap: true }}).setOrigin(0.5)
@@ -66,7 +66,7 @@ class Shop extends Phaser.Scene{
         })
 
         //attackBase buy
-        const buyAttackBase= this.add.text(w*0.5, h*0.6, 'Increase Attack Base + 5', {fontSize: 28*0.5625}).setOrigin(0.5);
+        const buyAttackBase= this.add.text(w*0.5, h*0.6, 'Increase Attack Base +1', {fontSize: 28*0.5625}).setOrigin(0.5);
         const costAttackBase= this.add.text(w*0.5, h*0.6625, ' This will cost you: ', {fontSize: 18*0.5625}).setOrigin(0.5)
         const attackBaseItems=[ 'meat', 'stone', 'coin', 'wood']
         attackBaseItems.forEach((item, i)=>{
@@ -85,7 +85,7 @@ class Shop extends Phaser.Scene{
                 playerStats.items.meat-=50;
                 playerStats.items.stone-=250;
                 playerStats.money-=50;
-                playerStats.attackBase+=5
+                playerStats.attackBase+=1;
                 const rect2=this.add.rectangle(w*0.5,h*0.5, w*0.5,h*0.5, 0xffffff).setOrigin(0.5).setInteractive();
                 const txtMessage= this.add.text(w*0.50625,h*0.50625, 'Bought completed!', {fontSize: 25, color:'black',lineSpacing: 10 , wordWrap: { width: w*0.5, useAdvancedWrap: true }}).setOrigin(0.5)
                 const okTxt= this.add.text(w*0.625, rect2.y+h*0.0625, 'Ok', {fontSize: 35, color: 'black'}).setInteractive().setOrigin(0.5)
