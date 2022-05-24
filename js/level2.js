@@ -128,7 +128,7 @@ class Level2 extends Phaser.Scene{
             x:6487,
             y:7800
         }]
-        console.log(hospitalsVisited[hospitalsVisited.length-1])
+        console.log(hospitalsVisited)
 
         //Array of Animals on the grass
 

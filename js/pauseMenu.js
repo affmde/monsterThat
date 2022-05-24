@@ -31,7 +31,7 @@ class PauseMenu extends Phaser.Scene{
         const items= this.add.text(w*0.75, h*0.48, 'Items', {color: 'black', fontSize: 25}).setOrigin(0.5).setScrollFactor(0).setInteractive();
         const save= this.add.text(w*0.75, h*0.58, 'Save', {color: 'black', fontSize: 25}).setOrigin(0.5).setScrollFactor(0).setInteractive();
         const badges= this.add.text(w*0.75, h*0.68, 'Badges', {color: 'black', fontSize: 25}).setOrigin(0.5).setScrollFactor(0).setInteractive();
-    
+        
         this.showMenu={
             stats:false,
             items:false,
