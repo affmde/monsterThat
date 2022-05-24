@@ -320,9 +320,9 @@ class Battle extends Phaser.Scene{
     handleOpponentDamage(){
         let damage;
         if(currentOponnent.type==='GymLeader'){
-            damage=Math.floor(Math.random()*currentOponnent.level)+(Math.floor(Math.random()*8))
+            damage=Math.floor(Math.random()*currentOponnent.level)+(Math.floor(Math.random()*8))+1
         }else if(currentOponnent.type==='Trainer'){
-            damage=Math.floor(Math.random()*(currentOponnent.level+3))
+            damage=Math.floor(Math.random()*(currentOponnent.level+3))+1
         }else if(currentOponnent.type==='Bug'){
             if(currentOponnent.fig==="mashroom"){
                 damage=Math.floor(Math.random()*(currentOponnent.level))+0.08
