@@ -21,6 +21,7 @@ class Hospital extends Phaser.Scene{
             playerStats.hp=playerStats.maxHp;
             currentScene='Level2';
             hospitalsVisited.push(currentHospital)
+            console.log('hospitals vistited: ', hospitalsVisited)
             setTimeout(()=>{
                 this.scene.stop()
                 this.scene.resume('Level2')
@@ -29,6 +30,7 @@ class Hospital extends Phaser.Scene{
 
         ansB.on('pointerdown', ()=>{
             currentScene='Level2';
+            console.log('hospitals vistited: ', hospitalsVisited)
             this.scene.resume('Level2')
             this.scene.stop();
         })

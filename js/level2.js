@@ -503,6 +503,7 @@ class Level2 extends Phaser.Scene{
             hospitalsVisited: hospitalsVisited,
             
         }
+        console.log(saveFile)
         localStorage.setItem('monsterThatSaveGame', JSON.stringify(saveFile));
         console.log('Game Saved')
     }

@@ -13,7 +13,7 @@ class StartScene extends Phaser.Scene{
     }
 
     create(){
-        this.add.image(0,0,'homeBg').setOrigin(0).setAlpha(0.7)
+        this.add.image(0,0,'homeBg').setOrigin(0)
         const savedGame= localStorage.getItem('monsterThatSaveGame')
         const title= this.add.text(w/2, h*0.10, 'The Adventurer', {
 			fontFamily: 'Quicksand',
