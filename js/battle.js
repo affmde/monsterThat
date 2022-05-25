@@ -60,6 +60,12 @@ class Battle extends Phaser.Scene{
         this.heartRecover= this.add.image(w*0.53, h*0.83, 'heartRecover').setInteractive();
         //Quit
         this.quitBtn= this.add.image(w*0.90, h*0.83, 'quit').setInteractive().on('pointerdown', ()=>{
+            victory=false
+            clearInterval(this.opponentAttack)
+            opponent.disableInteractive();
+            this.heartRecover.disableInteractive();
+            this.heartRecover.setAlpha(0.3)
+            this.activeHeart && clearTimeout(this.activeHeart)
             currentScene='Level2'
             this.scene.stop();
             this.scene.resume('Level2');

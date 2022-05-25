@@ -235,8 +235,16 @@ const checkLevel = ()=>{
         return 5
     }else if(playerStats.xp< 8500){
         return 6
-    }else{
+    }else if(playerStats.xp<10500){
         return 7
+    }else if(playerStats.xp<13000){
+        return 8
+    }else if(playerStats.xp<15500){
+        return 9
+    }else if(playerStats.xp<18000){
+        return 10
+    }else{
+        return 11
     }
 }
 
