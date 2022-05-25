@@ -342,7 +342,7 @@ class Level2 extends Phaser.Scene{
         map.getObjectLayer('hospital').objects.forEach(hospital=>{
             const newHospital = hospitals.create(hospital.x, hospital.y, 'guard').setAlpha(0.1).setOrigin(0,1);
             this.physics.add.collider(newHospital, this.player, (hosp, player)=>{
-                this.player.y=this.player.y+10;
+                this.player.y=this.player.y+18;
                 this.player.setVelocity(0)
                 animation='down'
                 currentScene="Hospital"
@@ -363,7 +363,7 @@ class Level2 extends Phaser.Scene{
             immovable: true
         });
         map.getObjectLayer('shops').objects.forEach(shop=>{
-            const newShop= shops.create(shop.x,shop.y, 'guard').setAlpha(0.1).setOrigin(0.5,1)
+            const newShop= shops.create(shop.x,shop.y, 'guard').setAlpha(0.1).setOrigin(0.5,0.8)
             this.physics.add.collider(newShop, this.player, ()=>{
                 this.player.y=this.player.y+10;
                 animation='down'

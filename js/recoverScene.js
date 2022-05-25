@@ -11,14 +11,15 @@ class RecoverScene extends Phaser.Scene{
         const cost = Math.floor(playerStats.money*(playerStats.level*0.2))
         if(cost<=0){
             this.add.image(0,0, 'hospitalBg').setOrigin(0)
-            this.add.text(w*0.025,h*0.125, 'Game Over!', {fontSize: 28*0.5625});
-            this.add.text(w*0.025,h*0.3125, 'You had no money to cover your recover', {fontSize: 25*0.5625})
+            this.add.text(w*0.025,h*0.125, 'You have no money to pay!', {fontSize: 28, color: 'black', lineSpacing: 10, wordWrap: { width: 680, useAdvancedWrap: true }});
+            this.add.text(w*0.025,h*0.3125, 'Your recover process cost you all your items', {fontSize: 25, color: 'black', lineSpacing: 10, wordWrap: { width: 680, useAdvancedWrap: true }})
+            playerStats.money=0;
+            playerStats.hp=playerStats.maxHp;
+            playerStats.items= playerStartingStats.player.items
             setTimeout(()=>{
                 currentScene='Level2';
-                localStorage.removeItem('monsterThatSaveGame')
                 this.scene.stop();
-                this.scene.stop('Level2')
-                this.scene.start('StartScene')
+                this.scene.resume('Level2')
             },3000)
         }else{
             this.add.image(0,0, 'hospitalBg').setOrigin(0)
