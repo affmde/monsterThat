@@ -129,7 +129,8 @@ class PauseMenu extends Phaser.Scene{
             defeatedOpponents: defeatedOpponents,
             oppenedBaus: oppenedBaus,
             defeatedGyms: defeatedGyms,
-            
+            hospitalsVisited: hospitalsVisited,
+            badges: badges
         }
         localStorage.setItem('monsterThatSaveGame', JSON.stringify(saveFile));
         console.log('Game Saved')
