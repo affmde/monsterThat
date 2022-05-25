@@ -16,6 +16,7 @@ let options={
         joystic: true,
     }
 }
+let princessSaved=false;
 
 class Level2 extends Phaser.Scene{
     constructor(){
@@ -263,7 +264,7 @@ class Level2 extends Phaser.Scene{
                     bau.setTexture('openedBau')
                     const prizes= handleItemsReward()
                     console.log(prizes)
-                    const moneyReward= Math.floor(Math.random()*(100*playerStats.level))
+                    const moneyReward= Math.floor(Math.random()*(10*playerStats.level))
                     playerStats.money+=moneyReward;
                     console.log(playerStats)
                     oppenedBaus.push(newBau.id)
@@ -379,8 +380,15 @@ class Level2 extends Phaser.Scene{
         map.getObjectLayer('princessPlace').objects.forEach(place=>{
             const newPlace= princessPlaces.create(place.x,place.y, 'guard').setAlpha(0.1).setOrigin(0.5,0.8)
             this.physics.add.collider(newPlace, this.player, ()=>{
-                currentScene="PrincessRescue";
-                const dialog= new DialogBox(this, "THis must be the place. Let's get in and rescue the princess.", 'PrincessRescue', 'Level2', null)
+                if(!badges.one || !badges.two || !badges.three || !badges.four || !badges.five || !badges.six){
+                    return
+                }else if(princessSaved){
+                   const dialog = new DialogBox(this, "THis place bring good memories. But better don't go there again.", null, null, null) 
+                }else{
+                    currentScene="PrincessRescue";
+                    const dialog= new DialogBox(this, "This must be the place. Let's get in and rescue the princess.", 'PrincessRescue', 'Level2', null)
+                }
+                
             })
         })
 

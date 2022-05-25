@@ -89,6 +89,8 @@ class PrincessRescue extends Phaser.Scene{
     update(){
         if(this.i>=this.textArray.length){
             playerStats.money+=5000000;
+            currentScene='Level2';
+            princessSaved=true;
             this.bg.disableInteractive()
             this.scene.stop();
             this.scene.resume('Level2')
