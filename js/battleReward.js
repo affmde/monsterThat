@@ -76,7 +76,9 @@ class BattleReward extends Phaser.Scene{
             if(currentOponnent.type==="Trainer"){
                 defeatedOpponents.push(currentOponnent.id);
             }else if(currentOponnent.type==="GymLeader"){
-                defeatedGyms.push(currentOponnent.id)
+                defeatedGyms.push(currentOponnent.id);
+                this.handleBadge()
+
             }
             
             currentScene='Level2'
@@ -113,6 +115,22 @@ class BattleReward extends Phaser.Scene{
             }
             
             
+        }
+    }
+
+    handleBadge(){
+        if(currentOponnent.id===33){
+            badges.one=true
+        }else if(currentOponnent.id===87){
+            badges.two=true;
+        }else if(currentOponnent.id===157){
+            badges.three=true;
+        }else if(currentOponnent.id===257){
+            badges.four=true;
+        }else if(currentOponnent.id===279){
+            badges.five=true;
+        }else if(currentOponnent.id===317){
+            badges.six=true;
         }
     }
 

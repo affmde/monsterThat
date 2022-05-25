@@ -88,6 +88,11 @@ class Level2 extends Phaser.Scene{
         this.load.image('wood', 'assets/items/wood.png');
         this.load.image('menu', 'assets/menuIcon.png');
         this.load.image('fullscreen', 'assets/fullscreen.png');
+        this.load.image('caveman-gameScene', 'assets/opponents/caveman-gameScene.png');
+        this.load.image('eggBoy-gameScene', 'assets/opponents/eggBoy-gameScene.png');
+        this.load.image('monk-gameScene', 'assets/opponents/monk-gameScene.png');
+        this.load.image('oldMan-gameScene', 'assets/opponents/oldMan-gameScene.png');
+        this.load.image('villager-gameScene', 'assets/opponents/villager-gameScene.png');
         if(device!=='desktop'){
             this.load.image('up', 'assets/gamepad/up.png');
             this.load.image('down', 'assets/gamepad/down.png');
@@ -97,12 +102,11 @@ class Level2 extends Phaser.Scene{
         url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js';
         this.load.plugin('rexvirtualjoystickplugin', url, true);
         }
-        
     }
 
     create(){
         //Load Data
-        const loadData= loadGame()!==undefined ? loadGame() : playerStartingStats;
+        const loadData= newGame===false ? loadGame() : playerStartingStats;
         console.log(loadData)
         playerStats={
             level: loadData.player.level || 1,
@@ -120,6 +124,8 @@ class Level2 extends Phaser.Scene{
             attackBase: loadData.player.attackBase || 2,
             recoverBase: loadData.player.recoverBase || 10
         }
+
+        badges=loadData.badges || startingBadges
 
         defeatedOpponents=loadData.defeatedOpponents || []
         oppenedBaus=loadData.oppenedBaus || [];
@@ -184,7 +190,7 @@ class Level2 extends Phaser.Scene{
             immovable: true
         });
         map.getObjectLayer('Opponent1').objects.forEach(trainer=>{
-            const newTrainer = opponents1.create(trainer.x, trainer.y, 'ranger');
+            const newTrainer= this.handleCreatePlayer(trainer.properties[4].value, trainer).var
             newTrainer.properties= trainer.properties;
             this.physics.add.collider(newTrainer, this.player, (opponent, player)=>{
                 if(this.checkDefeatedTrainers(trainer.id)){
@@ -197,7 +203,7 @@ class Level2 extends Phaser.Scene{
                     currentOponnent.hp=opponent.properties[0].value;
                     currentOponnent.moneyReturn=opponent.properties[2].value;
                     currentOponnent.level=opponent.properties[1].value;
-                    currentOponnent.fig= 'ranger';
+                    currentOponnent.fig= this.handleCreatePlayer(trainer.properties[4].value, trainer).fig;
                     currentOponnent.type='Trainer';
                     currentScene='Battle';
                     this.checkDefeatedTrainers(trainer.id)
@@ -212,7 +218,7 @@ class Level2 extends Phaser.Scene{
             immovable: true
         });
         map.getObjectLayer('Opponent2').objects.forEach(trainer=>{
-            const newTrainer = opponents1.create(trainer.x, trainer.y, 'elf');
+            const newTrainer= this.handleCreatePlayer(trainer.properties[4].value, trainer).var
             newTrainer.properties= trainer.properties;
             this.physics.add.collider(newTrainer, this.player, (opponent, player)=>{
                 if(this.checkDefeatedTrainers(trainer.id)){
@@ -225,7 +231,7 @@ class Level2 extends Phaser.Scene{
                     currentOponnent.hp=opponent.properties[0].value;
                     currentOponnent.moneyReturn=opponent.properties[2].value;
                     currentOponnent.level=opponent.properties[1].value;
-                    currentOponnent.fig= 'elf';
+                    currentOponnent.fig= this.handleCreatePlayer(trainer.properties[4].value, trainer).fig;
                     currentOponnent.type='Trainer';
                     currentScene='Battle';
                     this.checkDefeatedTrainers(trainer.id)
@@ -276,14 +282,16 @@ class Level2 extends Phaser.Scene{
         });
         
         map.getObjectLayer('gyms').objects.forEach(gym=>{
-            const newGym = gyms.create(gym.x, gym.y, 'elf').setAlpha(0.1).setOrigin(0,1)
+            const newGym = gyms.create(gym.x, gym.y, 'elf').setAlpha(0.1).setOrigin(0,0.5)
             newGym.properties=gym.properties
             newGym.id=gym.id
             this.physics.add.collider(newGym, this.player, (gym, player)=>{
                 if(this.checkDefeatedGyms(newGym.id)){
                     const dialog= new DialogBox(this, "I dont want to see you again. You proved to be too good!", null,null,null)
                 }else{
-                    this.saveGame()
+                    this.player.y=this.player.y+10;
+                    this.player.setVelocity(0);
+                    animation='down';
                     currentOponnent=gym.properties;
                     currentOponnent.hp=gym.properties[2].value;
                     currentOponnent.moneyReturn=gym.properties[4].value;
@@ -503,6 +511,7 @@ class Level2 extends Phaser.Scene{
             oppenedBaus: oppenedBaus,
             defeatedGyms: defeatedGyms,
             hospitalsVisited: hospitalsVisited,
+            badges: badges
             
         }
         console.log(saveFile)
@@ -730,6 +739,40 @@ class Level2 extends Phaser.Scene{
             console.log(hospitalsVisited)
         }
         victory=undefined
+    }
+
+    handleCreatePlayer(type, trainer){
+        if(type==="A"){
+            return {
+                var: opponents1.create(trainer.x, trainer.y, 'caveman-gameScene'),
+                fig: 'caveman'
+            }
+        }else if(type==='B'){
+            return {
+                var: opponents1.create(trainer.x, trainer.y, 'monk-gameScene'),
+                fig: 'monk'
+            }
+        }else if(type==='C'){
+            return {
+                var: opponents1.create(trainer.x, trainer.y, 'eggBoy-gameScene'),
+                fig: 'eggBoy'
+            }
+        }else if(type==="D"){
+            return {
+                var: opponents1.create(trainer.x, trainer.y, 'oldMan-gameScene'),
+                fig: 'oldMan'
+            }
+        }else if(type==="E"){
+            return {
+                var: opponents1.create(trainer.x, trainer.y, 'villager-gameScene'),
+                fig: 'villager'
+            }
+        }else{
+            return {
+                var: opponents1.create(trainer.x, trainer.y, 'ranger'),
+                fig: 'ranger'
+            }
+        }
     }
 }
 

@@ -112,12 +112,12 @@ class PauseMenu extends Phaser.Scene{
             const badge5= this.add.image(w*0.35, h*0.70, 'badge5').setScrollFactor(0);
             const badge6= this.add.image(w*0.55, h*0.70, 'badge6').setScrollFactor(0);
 
-            this.checkForBadges(33)? badge1.setTint(0xFFFFFF).setAlpha(1) :badge1.setTint(0x000000).setAlpha(0.8);
-            this.checkForBadges(87)? badge2.setTint(0xFFFFFF).setAlpha(1) :badge2.setTint(0x000000).setAlpha(0.8);
-            this.checkForBadges(157)? badge3.setTint(0xFFFFFF).setAlpha(1) :badge3.setTint(0x000000).setAlpha(0.8);
-            this.checkForBadges(257)? badge4.setTint(0xFFFFFF).setAlpha(1) :badge4.setTint(0x000000).setAlpha(0.8);
-            this.checkForBadges(279)? badge5.setTint(0xFFFFFF).setAlpha(1) :badge5.setTint(0x000000).setAlpha(0.8);
-            this.checkForBadges(317)? badge6.setTint(0xFFFFFF).setAlpha(1) :badge6.setTint(0x000000).setAlpha(0.8);
+            badges.one? badge1.setTint(0xFFFFFF).setAlpha(1) :badge1.setTint(0x000000).setAlpha(0.8);
+            badges.two? badge2.setTint(0xFFFFFF).setAlpha(1) :badge2.setTint(0x000000).setAlpha(0.8);
+            badges.three ? badge3.setTint(0xFFFFFF).setAlpha(1) :badge3.setTint(0x000000).setAlpha(0.8);
+            badges.four? badge4.setTint(0xFFFFFF).setAlpha(1) :badge4.setTint(0x000000).setAlpha(0.8);
+            badges.five? badge5.setTint(0xFFFFFF).setAlpha(1) :badge5.setTint(0x000000).setAlpha(0.8);
+            badges.six? badge6.setTint(0xFFFFFF).setAlpha(1) :badge6.setTint(0x000000).setAlpha(0.8);
         }
     }
 
@@ -133,10 +133,6 @@ class PauseMenu extends Phaser.Scene{
         }
         localStorage.setItem('monsterThatSaveGame', JSON.stringify(saveFile));
         console.log('Game Saved')
-    }
-
-    checkForBadges(id){
-        defeatedGyms.find(n=>n===id) ? true : false
     }
     
 }
