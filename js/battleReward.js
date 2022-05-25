@@ -62,6 +62,8 @@ class BattleReward extends Phaser.Scene{
                 this.herbsValue= this.add.text(w*0.70, h*0.67, `x${this.itemReward.herbs}`, {fontSize: 25, color: 'black'}).setScrollFactor(0).setOrigin(0.5);
                 this.moneyValue= this.add.text(w*0.70, h*0.75, `x${this.itemReward.money}`, {fontSize: 25, color: 'black'}).setScrollFactor(0).setOrigin(0.5);
 
+
+                playerStats.xp+=20+Math.floor(Math.random()*10)
                 this.continueBTN= this.add.text(w*0.75, h*0.85, 'Continue', {fontSize: 25, color: 'black'}).setInteractive().setAlpha(0).setOrigin(0.5)
             }else{
                 const rand= Math.floor(Math.random()*(this.talkArray.length-1))
