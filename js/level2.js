@@ -367,6 +367,7 @@ class Level2 extends Phaser.Scene{
             const newShop= shops.create(shop.x,shop.y, 'guard').setAlpha(0.1).setOrigin(0.5,0.8)
             this.physics.add.collider(newShop, this.player, ()=>{
                 this.player.y=this.player.y+10;
+                this.player.setVelocity(0)
                 animation='down'
                 currentScene="Shop";
                 const dialog= new DialogBox(this, 'Hmm.. a shop! Maybe i can buy something here.', 'Shop', 'Level2', null)
