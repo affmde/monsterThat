@@ -8,7 +8,7 @@ class RecoverScene extends Phaser.Scene{
     }
 
     create(){
-        const cost = Math.floor(playerStats.money*(playerStats.level*0.2))
+        const cost = 60+Math.floor(Math.random()*(playerStats.level+10))
         if(cost<=0){
             this.add.image(0,0, 'hospitalBg').setOrigin(0)
             this.add.text(w*0.025,h*0.125, 'You have no money to pay!', {fontSize: 28, color: 'black', lineSpacing: 10, wordWrap: { width: 680, useAdvancedWrap: true }});

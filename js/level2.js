@@ -261,6 +261,7 @@ class Level2 extends Phaser.Scene{
                     return
                 }else{
                     currentScene='Bau'
+                    this.player.setVelocity(0)
                     bau.setTexture('openedBau')
                     const prizes= handleItemsReward()
                     console.log(prizes)
